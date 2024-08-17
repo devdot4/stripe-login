@@ -1,8 +1,5 @@
-// Import Firebase libraries
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-
-// Your web app's Firebase configuration
+import { initializeApp } from "firebase/app";
+// Initialize Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCIIh1I-pDFnkb-qZiJWlL0PwDVyupoa0o",
   authDomain: "stripe-login-75699.firebaseapp.com",
@@ -12,9 +9,9 @@ const firebaseConfig = {
   appId: "1:155000861081:web:536fe4c5febc67b20d2308"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+
+const auth = firebase.auth();
 
 // Registration
 document.getElementById('register-form').addEventListener('submit', (e) => {
@@ -22,7 +19,7 @@ document.getElementById('register-form').addEventListener('submit', (e) => {
   const email = document.getElementById('register-email').value;
   const password = document.getElementById('register-password').value;
 
-  createUserWithEmailAndPassword(auth, email, password)
+  auth.createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       alert('Registration Successful!');
     })
@@ -37,7 +34,7 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
   const email = document.getElementById('login-email').value;
   const password = document.getElementById('login-password').value;
 
-  signInWithEmailAndPassword(auth, email, password)
+  auth.signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
       alert('Login Successful!');
     })
